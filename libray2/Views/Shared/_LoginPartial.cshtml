@@ -1,0 +1,41 @@
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject ApplicationDbContext DbContext
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    var completedEntries = await DbContext.WorkspaceEntries
+        .Where(e => e.ExitTime != null)
+        .ToListAsync();
+
+    var totalEarnings = completedEntries.Sum(e => e.CalculatedEarnings);
+
+    <li class="nav-item">
+        <span class="nav-link text-light">
+            <i class="fas fa-user"></i> @UserManager.GetUserName(User)
+            <span class="badge bg-success ms-2">
+                <i class="fas fa-coins"></i> @totalEarnings.ToString("N0") ريال
+            </span>
+        </span>
+    </li>
+    <li class="nav-item">
+        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="btn btn-outline-light">
+                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+            </button>
+        </form>
+    </li>
+}
+else
+{
+    @* Removed Register Link: Only Admin can create users now. *@
+    <li class="nav-item">
+        <a class="btn btn-outline-light" id="login" asp-area="Identity" asp-page="/Account/Login">
+            <i class="fas fa-sign-in-alt"></i> تسجيل دخول المشرف
+        </a>
+    </li>
+}
+</ul> 

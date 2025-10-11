@@ -1,0 +1,66 @@
+@model libray2.Models.WorkspaceStatistics
+
+@{
+    ViewData["Title"] = "Workspace Statistics";
+}
+
+<div class="card shadow-lg border-0 rounded-3">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-4 rounded-top-3">
+        <h3 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Workspace Statistics</h3>
+        <div>
+            <a asp-action="Entries" class="btn btn-light me-2"><i class="fas fa-list me-1"></i>View Entries</a>
+            <a asp-action="Index" class="btn btn-success"><i class="fas fa-plus-circle me-1"></i>New Entry</a>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card text-center bg-primary text-white h-100">
+                    <div class="card-body">
+                        <i class="fas fa-chart-pie fa-3x mb-3"></i>
+                        <h5 class="card-title">Total Entries</h5>
+                        <h2 class="card-text display-4">@Model.TotalEntries</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center bg-success text-white h-100">
+                    <div class="card-body">
+                        <i class="fas fa-calendar-day fa-3x mb-3"></i>
+                        <h5 class="card-title">Today's Entries</h5>
+                        <h2 class="card-text display-4">@Model.TodayEntries</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center bg-info text-white h-100">
+                    <div class="card-body">
+                         <i class="fas fa-clock fa-3x mb-3"></i>
+                        <h5 class="card-title">Last Entry</h5>
+                        <h2 class="card-text display-6">@Model.LastEntryTime.ToString("g")</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card text-center border-primary h-100">
+                    <div class="card-body">
+                        <i class="fas fa-door-closed fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title text-primary">Private Room Entries (Completed)</h5>
+                        <h2 class="card-text display-4">@Model.PrivateRoomEntries</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card text-center border-success h-100">
+                    <div class="card-body">
+                         <i class="fas fa-door-open fa-3x text-success mb-3"></i>
+                        <h5 class="card-title text-success">Shared Room Entries (Completed)</h5>
+                        <h2 class="card-text display-4">@Model.SharedRoomEntries</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

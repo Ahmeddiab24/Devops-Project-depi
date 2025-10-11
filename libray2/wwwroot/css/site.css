@@ -1,0 +1,64 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* Add custom styles here */
+
+/* Gradient for card headers */
+.bg-gradient-primary {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+}
+
+.bg-gradient-success {
+     background: linear-gradient(45deg, #28a745, #1e7e34);
+}
+
+.bg-gradient-info {
+    background: linear-gradient(45deg, #17a2b8, #117a8b);
+}
+
+/* Add shadow to card */
+.card.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+}
+
+/* Rounded corners for cards */
+.rounded-3 {
+    border-radius: 0.5rem !important;
+}
+
+.rounded-top-3 {
+    border-top-left-radius: 0.5rem !important;
+    border-top-right-radius: 0.5rem !important;
+}
+
+.rounded-bottom-3 {
+    border-bottom-left-radius: 0.5rem !important;
+    border-bottom-right-radius: 0.5rem !important;
+}
+
+/* Improve table spacing */
+.table.align-middle th,
+.table.align-middle td {
+    vertical-align: middle;
+}
+
+/* Form floating label adjustments */
+.form-floating label {
+    padding: 1rem 0.75rem;
+}

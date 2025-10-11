@@ -1,0 +1,53 @@
+﻿@model libray2.Models.WorkspaceEntry
+
+@{
+    ViewData["Title"] = "Workspace Entry";
+    var settings = ViewBag.Settings as libray2.Models.Settings;
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-3">
+            <div class="card-header bg-primary text-white text-center py-4 rounded-top-3">
+                <h2 class="mb-0">Welcome to Codgoo Workspace</h2>
+            </div>
+            <div class="card-body p-5">
+                <form asp-action="CreateEntry" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                    <div class="form-floating mb-4">
+                        <input asp-for="Name" class="form-control form-control-lg" id="nameInput" placeholder=" " />
+                        <label for="nameInput"><i class="fas fa-user me-2"></i>Your Name</label>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label mb-3"><i class="fas fa-door-closed me-2"></i>Room Type</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="RoomType" type="radio" value="@RoomType.Private" class="form-check-input" id="roomTypePrivate" />
+                                <label class="form-check-label" for="roomTypePrivate">Private (@(settings?.PrivateRoomRatePerHour.ToString("C"))/hour)</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="RoomType" type="radio" value="@RoomType.Shared" class="form-check-input" id="roomTypeShared" />
+                                <label class="form-check-label" for="roomTypeShared">Shared (@(settings?.SharedRoomRatePerHour.ToString("C"))/hour)</label>
+                            </div>
+                        </div>
+                        <span asp-validation-for="RoomType" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-sign-in-alt me-2"></i>Enter Workspace</button>
+                    </div>
+                </form>
+            </div>
+             <div class="card-footer text-center bg-light border-0 py-4 rounded-bottom-3">
+                <a asp-area="Identity" asp-page="/Account/Login" class="text-muted text-decoration-none"><small>Are you an Admin? Login here.</small></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,75 @@
+@model libray2.Models.AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="card shadow-lg border-0 rounded-3">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-4 rounded-top-3">
+        <h3 class="mb-0"><i class="fas fa-tachometer-alt me-2"></i>Admin Dashboard</h3>
+        <div>
+             <a asp-action="Entries" class="btn btn-light me-2"><i class="fas fa-list me-1"></i>View All Entries</a>
+            <form asp-action="ResetEarnings" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to reset all current earnings and clear occupancy?');">
+                <button type="submit" class="btn btn-warning"><i class="fas fa-redo-alt me-1"></i>Reset Earnings & Clear Occupancy</button>
+            </form>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row g-4 mb-4">
+            <div class="col-md-6">
+                <div class="card text-center border-info h-100">
+                    <div class="card-body">
+                        <i class="fas fa-door-closed fa-3x text-info mb-3"></i>
+                        <h5 class="card-title text-info">Private Room Occupancy</h5>
+                        <h2 class="card-text display-4">@Model.PrivateRoomOccupancy</h2>
+                         <h5 class="card-title text-info mt-3">Potential Earnings</h5>
+                         <h2 class="card-text display-6">@Model.PrivateRoomEarnings.ToString("C")</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card text-center border-success h-100">
+                    <div class="card-body">
+                        <i class="fas fa-door-open fa-3x text-success mb-3"></i>
+                        <h5 class="card-title text-success">Shared Room Occupancy</h5>
+                        <h2 class="card-text display-4">@Model.SharedRoomOccupancy</h2>
+                         <h5 class="card-title text-success mt-3">Potential Earnings</h5>
+                         <h2 class="card-text display-6">@Model.SharedRoomEarnings.ToString("C")</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-4">
+             <div class="col-12">
+                <div class="card text-center border-primary">
+                    <div class="card-body">
+                        <i class="fas fa-dollar-sign fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title text-primary">Total Potential Earnings (Current Active)</h5>
+                        <h2 class="card-text display-4">@Model.TotalPotentialEarnings.ToString("C")</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="mt-4 mb-3"><i class="fas fa-users me-2"></i>Currently Occupying:</h4>
+         @if (Model.ActiveEntries.Any())
+         {
+              <ul class="list-group list-group-flush border rounded-3">
+                 @foreach (var entry in Model.ActiveEntries)
+                 {
+                     <li class="list-group-item d-flex justify-content-between align-items-center">
+                         <div>
+                             <strong>@entry.Name</strong> - @entry.RoomType Room
+                             <small class="text-muted d-block">Entry Time: @entry.EntryTime.ToString("g")</small>
+                         </div>
+                         <span class="badge bg-secondary rounded-pill">Duration: @((DateTime.Now - entry.EntryTime).TotalMinutes.ToString("F0")) minutes</span>
+                     </li>
+                 }
+             </ul>
+         }
+         else
+         {
+             <div class="alert alert-info text-center"><i class="fas fa-info-circle me-2"></i>No one is currently in the workspace.</div>
+         }
+    </div>
+</div> 

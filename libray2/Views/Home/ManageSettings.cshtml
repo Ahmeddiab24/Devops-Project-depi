@@ -1,0 +1,40 @@
+@model libray2.Models.AdminSettingsViewModel
+
+@{
+    ViewData["Title"] = "Manage Settings";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-3">
+            <div class="card-header bg-primary text-white text-center py-4 rounded-top-3">
+                <h3 class="mb-0"><i class="fas fa-cogs me-2"></i>Manage Workspace Settings</h3>
+            </div>
+            <div class="card-body p-5">
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-success mb-4"><i class="fas fa-check-circle me-2"></i>@ViewBag.Message</div>
+                }
+                <form asp-action="SaveSettings" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+                    
+                    <div class="form-floating mb-4">
+                        <input asp-for="PrivateRoomRatePerHour" class="form-control form-control-lg" id="privateRateInput" placeholder=" " />
+                        <label for="privateRateInput"><i class="fas fa-dollar-sign me-2"></i>@Html.DisplayNameFor(model => model.PrivateRoomRatePerHour)</label>
+                        <span asp-validation-for="PrivateRoomRatePerHour" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input asp-for="SharedRoomRatePerHour" class="form-control form-control-lg" id="sharedRateInput" placeholder=" " />
+                        <label for="sharedRateInput"><i class="fas fa-dollar-sign me-2"></i>@Html.DisplayNameFor(model => model.SharedRoomRatePerHour)</label>
+                        <span asp-validation-for="SharedRoomRatePerHour" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-save me-2"></i>Save Settings</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 

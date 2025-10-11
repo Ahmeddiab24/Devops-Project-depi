@@ -1,0 +1,46 @@
+@model libray2.Models.CreateUserViewModel
+
+@{
+    ViewData["Title"] = "Create Admin User";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-3">
+            <div class="card-header bg-primary text-white text-center py-4 rounded-top-3">
+                <h3 class="mb-0"><i class="fas fa-user-plus me-2"></i>Create New Admin User</h3>
+            </div>
+            <div class="card-body p-5">
+                @if (ViewBag.Message != null)
+                {
+                    <div class="alert alert-success mb-4"><i class="fas fa-check-circle me-2"></i>@ViewBag.Message</div>
+                }
+                <form asp-controller="Admin" asp-action="CreateUser" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                    <div class="form-floating mb-4">
+                        <input asp-for="Email" class="form-control form-control-lg" id="emailInput" placeholder=" " />
+                        <label for="emailInput"><i class="fas fa-envelope me-2"></i>@Html.DisplayNameFor(model => model.Email)</label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input asp-for="Password" class="form-control form-control-lg" id="passwordInput" placeholder=" " />
+                        <label for="passwordInput"><i class="fas fa-lock me-2"></i>@Html.DisplayNameFor(model => model.Password)</label>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                     <div class="form-floating mb-4">
+                        <input asp-for="ConfirmPassword" class="form-control form-control-lg" id="confirmPasswordInput" placeholder=" " />
+                        <label for="confirmPasswordInput"><i class="fas fa-lock me-2"></i>@Html.DisplayNameFor(model => model.ConfirmPassword)</label>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-user-plus me-2"></i>Create User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 

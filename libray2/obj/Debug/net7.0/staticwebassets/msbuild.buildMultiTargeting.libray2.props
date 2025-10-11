@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\libray2.props" />
+</Project>
